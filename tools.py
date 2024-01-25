@@ -42,8 +42,11 @@ def convert_annotation(dir_path, output_path, classes):
     h = int(size.find('height').text)
 
     for obj in root.iter('object'):
-        cls = obj.find('name').text
-        cls_id = classes.index(cls)
+        if classes == ['Dog']:
+            cls_id = 0
+        else:
+            cls = obj.find('name').text
+            cls_id = classes.index(cls)
         xmlbox = obj.find('bndbox')
         b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
         bb = convert((w,h), b)
@@ -76,7 +79,7 @@ def create_yaml(train_dir: str,
                 name='yolo_dataset.yml'):
 
     yaml_data = {
-        'path': "/home/eirini/PycharmProjects/DogBreed",
+        'path': os.getcwd(),
         'train': train_dir,
         'val': valid_dir,
         'test': test_dir,
@@ -88,6 +91,7 @@ def create_yaml(train_dir: str,
 
 
 def create_yolov8_dataset(image_paths: np.ndarray,
+                          classes: list[str],
                           test: Optional[np.ndarray] = None,
                           name: str = 'yolo_dataset.yml',
                           task: str = 'detect',
@@ -96,6 +100,7 @@ def create_yolov8_dataset(image_paths: np.ndarray,
     Create the expected yolov8 dataset format as presented in
     https: // docs.ultralytics.com / datasets / classify /
     :param image_paths: Image paths for train+valid set
+    :param classes: List of available classes for example ['Eskimo_dog', 'bull_mastiff', 'Ibizan_hound']
     :param test: Optional test path for train+valid set
     :param name:
     :param task: One of 'detect', 'classify'
@@ -115,14 +120,14 @@ def create_yolov8_dataset(image_paths: np.ndarray,
                                                 train_size=1-valid_size,
                                                 random_state=random_state)
 
-    # Create directories for training and validation sets
-    train_dir = "datasets/yolov8_imgs/train"
-    valid_dir = "datasets/yolov8_imgs/val"
-    dataset_initial_dir = "datasets/Dataset/Images"
+    # Get paths for train and validation set to save the dataset
+    train_dir = os.environ['TRAIN_DIR']
+    valid_dir = os.environ['VAL_DIR']
+
     img_train_dir = os.path.join(train_dir, "images")
     img_valid_dir_dir = os.path.join(valid_dir, "images")
 
-    classes = [lbl.split("-", 1)[1] for lbl in os.listdir(dataset_initial_dir)]
+    dataset_initial_dir = os.environ['DATA_DIR']
 
     # Copy images to the training directory
     for train_img in train_paths:
@@ -143,7 +148,7 @@ def create_yolov8_dataset(image_paths: np.ndarray,
     print(f"Validation samples: {len(valid_paths)}")
 
     if test is not None:
-        test_dir = "datasets/yolov8_imgs/test"
+        test_dir = os.environ['TEST_DIR']
         img_test_dir = os.path.join(test_dir, "images")
         for test_img in test:
             copy_img(img_test_dir, test_img[0], dataset_initial_dir, task)
@@ -155,5 +160,3 @@ def create_yolov8_dataset(image_paths: np.ndarray,
         test_dir = None
 
     create_yaml(train_dir, valid_dir, classes, test_dir, name=name)
-
-

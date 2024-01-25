@@ -17,13 +17,13 @@ create_yolov8_dataset(train_files,
                       random_state=42)
 
 # N stands for nano which is the smaller version of yolo
-yolo_sizes = ['n', 'l']
+yolo_sizes = ['m']
 for size in yolo_sizes:
     # load a pretrained model (recommended for training)
     model = YOLO(f'yolov8{size}.pt', task='detect')
     # Train the model
     results = model.train(data='dogbreed.yaml',
-                          epochs=24,
-                          imgsz=240,
-                          batch=30,
-                          name='yolov8n_dogbreed')
+                          epochs=100,
+                          imgsz=220,
+                          batch=64,  # For batch we pick a power of two that my laptop can handle
+                          name=f'yolov8n_dogbreed_2501_{size}')

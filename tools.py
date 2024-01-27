@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 from ultralytics import YOLO
 
+
 class Trainer:
     def __init__(self,
                  train_files,
@@ -27,7 +28,11 @@ class Trainer:
         self.yolo_sizes = yolo_sizes
         self.model_kwargs = model_kwargs
 
-    def prepare_solution(self, solution):
+    def prepare_solution(self, solution: str):
+        """
+        This helper function prepares some parameters considering the solution
+        configuration.
+        """
         if solution in ['SOLUTION_1', 'solution_1']:
             # Find what classes are available
             self.classes = [lbl.split("-", 1)[1] for lbl in os.listdir(self.data_directory)]
@@ -42,8 +47,6 @@ class Trainer:
             self.yolo_type = ''
             self.data = f'dogbreed.yaml'
         else:
-            # single_cls = True
-
             raise ValueError('Wrong solution name')
 
     def train(self, solution):
@@ -104,11 +107,11 @@ def convert_annotation(dir_path, output_path, classes):
     """
     basename = os.path.basename(dir_path)
     os.makedirs(output_path, exist_ok=True)
-
     out_file = open(output_path + basename + '.txt', 'w')
     tree = ET.parse(dir_path)
     root = tree.getroot()
     size = root.find('size')
+
     w = int(size.find('width').text)
     h = int(size.find('height').text)
 
@@ -154,6 +157,9 @@ def create_yaml(train_dir: str,
 
 
 def split_train_val(image_paths, valid_size: float = 0.2, random_state: int = 42, save=True):
+    """
+    Splits dataset in a stratified manner into train and validation sets
+    """
     assert (0 <= valid_size < 1), "Invalid valid size for yolov8 setup"
     breed_lbl = [os.path.dirname(pth[0]).split('-', 1)[1] for pth in image_paths]
     # Split the dataset into training and validation sets in a stratified manner
@@ -184,9 +190,12 @@ def create_yolov8_dataset(classes: list[str],
     Create the expected yolov8 dataset format as presented in
     https: // docs.ultralytics.com / datasets / classify /
     :param classes: List of available classes for example ['Eskimo_dog', 'bull_mastiff', 'Ibizan_hound']
-    :param test: Optional test path for train+valid set
-    :param name: str Name of the yml file for passing into yolov8 only used in detect tasks
-    :param task: One of 'detect', 'classify'
+    :param train_dir: Directory where the training set for yolov8 will be saved (Example : datasets/yolov8_imgs/train)
+    :param val_dir: : Directory where the valid set for yolov8 will be saved (datasets/yolov8_imgs/val)
+    :param dataset_initial_dir: Directory where the initial dataset is located.
+    :param test: Numpy array containing test filepaths
+    :param name: Name of the yml file for passing into yolov8 only used in detect tasks
+    :param task: One of 'detect' or 'classify'
     :return:
     """
     assert task in ['detect', 'classify'], \

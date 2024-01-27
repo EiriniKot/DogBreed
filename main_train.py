@@ -21,8 +21,8 @@ if __name__ == '__main__':
                           valid_size=0.2,
                           random_state=42,
                           yolo_sizes=yolo_sizes,
-                          model_kwargs={'epochs': 100, 'imgsz': 240,
-                                        'batch': 16, 'patience': 25},
+                          model_kwargs={'epochs': 50, 'imgsz': 128,
+                                        'batch': 64, 'patience': 25},
                           save=True)
         for solution in apply_solutions:
             print(f'Trying experiment with solution {solution}')

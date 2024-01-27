@@ -74,10 +74,17 @@ For all the experiments we set this parameter to 0.2 which is a common standard.
 
 #### Model Training Parameters
 We also have other adjustable parameters such as epochs, batch size and patience. 
-These are set as following:  <br /> 
+For solution 1 the model_kwargs are set as following:  <br /> 
 `model_kwargs={'epochs': 100, 
                'batch': 16, 
+                'imgsz': 224,
                'patience': 25}` <br /> 
+For the solution 2 due to time limitations half of the epochs were utilized such 
+as:  <br /> 
+`model_kwargs={'epochs': 50, 
+                'imgsz': 128,
+                'batch': 64, 
+                'patience': 25},`
 Note that by using model_kwargs any training configuration parameters found [here](https://docs.ultralytics.com/usage/cfg/) can passed into the training
 
 The yolov8_imgs folder will be built before training by the Trainer following the requested dataset format
@@ -89,4 +96,4 @@ For classification (solution 1) we get a training accuracy (top1) of 0.74 and (t
 while in test set accuracy score is 0.74. This means that we don't have any overfit case here.
 Other metrics, plus the confusion matrix can be found if you run main_results.py
 Training curves for solution 1: <br /> 
-![img_4.png](img_4.png)
+<img src="img_4.png" alt="img_4" style="width:300px;"/>

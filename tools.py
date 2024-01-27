@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 from ultralytics import YOLO
 
+
 class Trainer:
     def __init__(self,
                  train_files,
@@ -125,13 +126,6 @@ def convert_annotation(dir_path, output_path, classes):
 
 
 def copy_img(dir, src_img, dataset_initial_dir, task):
-    """
-
-    :param dir:
-    :param src_img:
-    :param dataset_initial_dir:
-    :return:
-    """
     if task == "detect":
         intermediate_lbl = ''
     else:
@@ -140,6 +134,7 @@ def copy_img(dir, src_img, dataset_initial_dir, task):
     os.makedirs(lbl, exist_ok=True)
     new_path = os.path.join(lbl, os.path.basename(src_img))
     shutil.copy(os.path.join(dataset_initial_dir, src_img), new_path)
+
 
 def create_yaml(train_dir: str,
                 valid_dir: str,
@@ -243,6 +238,7 @@ def copy_annotate_set(img, set_dir, previous_dir, classes, task):
 
 
 def crop_bbox():
+    # Not Utilized Yet.
     # Get paths for train and validation set to save the dataset
     train_dir = os.environ['TRAIN_DIR']
     img_train_dir = os.path.join(train_dir, "images")

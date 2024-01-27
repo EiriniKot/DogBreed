@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 from ultralytics import YOLO
 
-
 class Trainer:
     def __init__(self,
                  train_files,

@@ -85,9 +85,8 @@ for yolov8. This folder will automatically removed after training.
 The structure is the following: <br /> 
 ![img_3.png](img_3.png)
 
-The results are not good since the model is not able to identify classes correctly.
-This could be due to many factors such as the number of classes which is high 
-with the number of samples being low. On the other hand we have build a repo with complete
-functionality for utilizing different parameters and setups. 
-For classification we get a training accuracy (top1) of 0.73667 and (top5) 0.93792 respectively which 
-seems like the model overfits to the training dataset, thus we should use a bigger model ('m','l').
+For classification (solution 1) we get a training accuracy (top1) of 0.74 and (top5) 0.94 respectively 
+while in test set accuracy score is 0.74. This means that we don't have any overfit case here.
+Other metrics, plus the confusion matrix can be found if you run main_results.py
+Training curves for solution 1: <br /> 
+![img_4.png](img_4.png)

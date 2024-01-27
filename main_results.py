@@ -7,7 +7,7 @@ if __name__ == '__main__':
     mat = loadmat('datasets/test_data.mat')
     test_info = mat['test_info']
     test_files = test_info[0][0][0].flatten()
-    target_labels = test_info[0][0][2].flatten()
+    target_labels = test_info[0][0][2].flatten()-1
     data_dir = os.environ['DATA_DIR']
     results = ['runs/classify/yolov8_SOLUTION_1_classify_s',
                'runs/detect/yolov8_SOLUTION_2_detect_n']

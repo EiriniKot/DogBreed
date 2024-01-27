@@ -1,5 +1,7 @@
 import os
 from scipy.io import loadmat
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from ultralytics import YOLO
 
@@ -8,8 +10,8 @@ if __name__ == '__main__':
     test_info = mat['test_info']
     test_files = test_info[0][0][0].flatten()
     data_dir = os.environ['DATA_DIR']
-    results = ['runs/classify/yolov8_SOLUTION_1_classify_s',
-               'runs/detect/yolov8_SOLUTION_2_detect_n']
+    results = [#'runs/classify/yolov8_SOLUTION_1_classify_s',
+               'runs/detect/yolov8_SOLUTION_2_detect_n6']
 
     for result in results:
         print(result)
@@ -43,9 +45,3 @@ if __name__ == '__main__':
                                        digits=2,
                                        output_dict=False)
         print('Classification report :\n', report)
-
-        # Create Confusion Matrix
-        cf_mtrx = confusion_matrix(target_labels,
-                                   y_pred,
-                                   labels=None)
-        print('Confusion Matrix:\n', cf_mtrx)

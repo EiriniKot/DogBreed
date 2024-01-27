@@ -94,6 +94,12 @@ The structure is the following: <br />
 
 For classification (solution 1) we get a training accuracy (top1) of 0.74 and (top5) 0.94 respectively 
 while in test set accuracy score is 0.74. This means that we don't have any overfit case here.
-Other metrics, plus the confusion matrix can be found if you run main_results.py
+For other metrics, plus the confusion matrix you may run main_results.py or visit runs folder 
+in which much information about training is stored.
 Training curves for solution 1: <br /> 
-<img src="img_4.png" alt="img_4" style="width:300px;"/>
+<img src="img_4.png" alt="img_4" style="width:400px;"/>
+
+For the detection model (solution 2) we get a training accuracy
+of 0.20 which is expected since we reduced model size, sample sizes and epochs.
+<img src="img_5.png" alt="img_5" style="width:1000px;"/>
+

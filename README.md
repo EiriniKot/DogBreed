@@ -101,5 +101,9 @@ Training curves for solution 1: <br />
 
 For the detection model (solution 2) we get a training accuracy
 of 0.20 which is expected since we reduced model size, sample sizes and epochs.
+Training curves for solution 2 present that the model is able to learn 
+In the curves we can see that the model hasn't converged yet, so the optimization process is still ongoing, 
+and the model hasn't reached a stable solution. This makes us confident that
+the model might perform better in longer epochs.
 <img src="img_5.png" alt="img_5" style="width:1000px;"/>
 

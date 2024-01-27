@@ -9,10 +9,10 @@ ENV TEST_DIR=datasets/yolov8_imgs/test
 ENV DATA_DIR=datasets/Dataset/Images
 
 COPY requirements.txt requirements.txt
-COPY main.py main.py
+COPY main_train.py main.py
 COPY runs runs
 COPY datasets datasets
-COPY dogbreed.yaml dogbreed.yaml
+COPY datasets/dogbreed.yaml dogbreed.yaml
 
 
 RUN pip install --no-cache-dir -r requirements.txt

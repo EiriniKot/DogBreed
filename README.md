@@ -76,8 +76,8 @@ For all the experiments we set this parameter to 0.2 which is a common standard.
 We also have other adjustable parameters such as epochs, batch size and patience. 
 These are set as following:  <br /> 
 `model_kwargs={'epochs': 100, 
-               'batch': 32, 
-               'patience': 10}` <br /> 
+               'batch': 16, 
+               'patience': 25}` <br /> 
 Note that by using model_kwargs any training configuration parameters found [here](https://docs.ultralytics.com/usage/cfg/) can passed into the training
 
 The yolov8_imgs folder will be built before training by the Trainer following the requested dataset format
@@ -89,4 +89,5 @@ The results are not good since the model is not able to identify classes correct
 This could be due to many factors such as the number of classes which is high 
 with the number of samples being low. On the other hand we have build a repo with complete
 functionality for utilizing different parameters and setups. 
-
+For classification we get a training accuracy (top1) of 0.73667 and (top5) 0.93792 respectively which 
+seems like the model overfits to the training dataset, thus we should use a bigger model ('m','l').

@@ -12,7 +12,7 @@ if __name__ == '__main__':
     test_files = test_info[0][0][0].flatten()
 
     # n = nano is the smaller version of yolov8
-    yolo_sizes = ['s']
+    yolo_sizes = ['n']
     apply_solutions = ['SOLUTION_1', 'SOLUTION_2']
     try:
         trainer = Trainer(train_files,

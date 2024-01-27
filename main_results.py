@@ -10,7 +10,7 @@ if __name__ == '__main__':
     target_labels = test_info[0][0][2].flatten()
     data_dir = os.environ['DATA_DIR']
     results = ['runs/classify/yolov8_SOLUTION_1_classify_s',
-               'runs/detect/yolov8_SOLUTION_2_detect_s']
+               'runs/detect/yolov8_SOLUTION_2_detect_n']
 
     for result in results:
         print(result)
